@@ -64,7 +64,18 @@ public class Player : MonoBehaviour
         {
             pulosRestantes = maximoPulos;
         }
+
+        // Virar personagem com rotação
+        if (mover.x > 0.01f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+        else if (mover.x < -0.01f)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
     }
+
     private void FixedUpdate()
     {
         rig.linearVelocityX = mover.x * velocidade;
