@@ -73,3 +73,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/Sprites/animation/plataforma1.controller.meta
+Assets/Sprites/animation/plataforma1.controller
+Assets/Sprites/animation/plataforma.anim.meta
+Assets/Sprites/animation/plataforma.anim
+Assets/Scenes/Level01 Mapa.unity
+Assets/Plataforma.cs.meta
+Assets/Plataforma.cs

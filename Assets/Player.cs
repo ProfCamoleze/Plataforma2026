@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
@@ -15,17 +15,23 @@ public class Player : MonoBehaviour
     // Controle de pulo duplo
     public int pulosRestantes;
 
-    [Header("Ch�o (Ground Check)")]
+    [Header("Chão (Ground Check)")]
     public Transform groundCheck;
     public float raioGroundCheck = 0.2f;
     public LayerMask layerGround;
-    // Estado de ch�o
+    // Estado de chão
     private bool estaNoChao;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+
+
+    Animator anim;
+    // Start is called once before the first execution o
+    // f Update after the MonoBehaviour is created
     private void Awake()
     {
         rig = GetComponent<Rigidbody2D>();
         controles = new InputPlayer();
+        anim = GetComponent<Animator>();
 
     }
     private void OnEnable()
@@ -47,25 +53,25 @@ public class Player : MonoBehaviour
     void Update()
     {
         mover= controles.Player.Move.ReadValue<Vector2>();
-        // Checa se est� no ch�o
+        // Checa se está no chão
         estaNoChao = Physics2D.OverlapCircle(
             groundCheck.position,
             raioGroundCheck,
             layerGround
         );
 
-        // Aqui lemos o bot�o diretamente
+        // Aqui lemos o botão diretamente
         if (controles.Player.Jump.WasPressedThisFrame())
         {
             Pular();
         }
-        // Resetar pulos se tocar no ch�o
+        // Resetar pulos se tocar no chão
         if (estaNoChao)
         {
             pulosRestantes = maximoPulos;
         }
 
-        // Virar personagem com rota��o
+        // Virar personagem com rotação
         if (mover.x > 0.01f)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -74,6 +80,7 @@ public class Player : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
         }
+        AtualizarAnimacoes();
     }
 
     private void FixedUpdate()
@@ -92,9 +99,38 @@ public class Player : MonoBehaviour
            
         }
     }
+    // ✅ NOVO: Método separado para organizar todas as animações
+    private void AtualizarAnimacoes()
+    {
 
-    // Debug do GroundCheck
-    void OnDrawGizmosSelected()
+        // Animação de movimento no chão
+        anim.SetFloat("andar", Mathf.Abs(rig.linearVelocity.x));
+
+        if (estaNoChao)
+        {
+            // No chão = não está pulando nem caindo
+            anim.SetBool("Pulando", false);
+            anim.SetBool("caindo", false);
+        }
+        else
+        {
+            // Subindo
+            if (rig.linearVelocity.y > 0.1f)
+            {
+                anim.SetBool("Pulando", true);
+                anim.SetBool("caindo", false);
+            }
+            // Descendo
+            else if (rig.linearVelocity.y < -0.1f)
+            {
+                anim.SetBool("Pulando", false);
+                anim.SetBool("caindo", true);
+            }
+        }
+    }
+
+        // Debug do GroundCheck
+        void OnDrawGizmosSelected()
     {
         if (groundCheck == null) return;
 
