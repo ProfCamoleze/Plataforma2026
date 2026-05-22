@@ -2584,8 +2584,13 @@ GameObject:
   - component: {fileID: 884677654}
   - component: {fileID: 884677656}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: Player
   m_TagString: Player
+=======
+  m_Name: ow6_0
+  m_TagString: Untagged
+>>>>>>> parent of c217a3b (08-05)
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

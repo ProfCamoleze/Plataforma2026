@@ -80,3 +80,8 @@ Assets/Sprites/animation/plataforma.anim
 Assets/Scenes/Level01 Mapa.unity
 Assets/Plataforma.cs.meta
 Assets/Plataforma.cs
+Assets/TopDown/Player.controller
+Assets/TopDown/Scripts.meta
+Assets/TopDown/Scripts/PlayerTop.cs
+Assets/TopDown/Scripts/PlayerTop.cs.meta
+Assets/TopDown/Top.unity
